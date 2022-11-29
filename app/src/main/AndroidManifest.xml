@@ -19,8 +19,15 @@
             android:launchMode="singleTask" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="string"/>
+                <data android:host="string"/>
+                <data android:port="string"/>
+                <data android:path="string"/>
+                <data android:pathPattern="string"/>
+                <data android:pathPrefix="string"/>
+                <data android:mimeType="image/jpeg"/>
             </intent-filter>
         </activity>
     </application>

@@ -3,12 +3,17 @@ package com.example.activitytext;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,9 +25,13 @@ public class MainActivity extends AppCompatActivity {
         //通过在Intent中设置标志位来为Activity指定启动模式
         Intent intent = new Intent();
         intent.setClass(MainActivity.this,SecondActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-
+        intent.setDataAndType(Uri.parse("file://abc"),"image/jpeg");
+        PackageManager packageManager = getPackageManager();
+        if(packageManager.resolveActivity(intent,PackageManager.MATCH_DEFAULT_ONLY)!=null){
+            startActivity(intent);
+        }else{
+            Toast.makeText(this,"没有找到你想要的Activity",Toast.LENGTH_SHORT).show();
+        }
     }
 
     //在TextView的源码当中，这两个方法会保存文本选中状态和文本内容
